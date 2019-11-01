@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "eslint": "^6.6.0",
+    "mongoose": "^5.7.7",
     "telegraf": "^3.33.3"
   }
 }

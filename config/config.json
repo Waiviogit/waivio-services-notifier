@@ -1,3 +1,8 @@
 {
+  "db": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "notifier"
+  },
   "TELEGRAM_BOT_TOKEN": "917682508:AAErIaCZwXRxxxKXIJa1YZ3GORpneAGObJk"
 }

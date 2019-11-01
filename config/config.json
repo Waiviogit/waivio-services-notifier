@@ -4,5 +4,18 @@
     "port": 27017,
     "database": "notifier"
   },
+  "redis": {
+    "servers": [
+      {
+        "name": "waivio_staging",
+        "port": 9998
+      },
+      {
+        "name": "waivio_production",
+        "port": 9997
+      }
+    ],
+    "lastBlockDbNum": 2
+  },
   "TELEGRAM_BOT_TOKEN": "917682508:AAErIaCZwXRxxxKXIJa1YZ3GORpneAGObJk"
 }

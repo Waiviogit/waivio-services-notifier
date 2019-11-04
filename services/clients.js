@@ -30,3 +30,12 @@ exports.updateSubscribedNotifies = async ({ client_id, subscribedNotifies }) => 
         return { error };
     }
 };
+
+exports.getAllSubscribers = async () => {
+    try {
+        const clients = await clientModel.find({ subscribedNotifies: { $exists: true, $ne: [] } }).lean();
+        return { clients };
+    } catch (error) {
+        return { error };
+    }
+};

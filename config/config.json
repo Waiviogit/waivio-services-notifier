@@ -8,16 +8,34 @@
     "servers": [
       {
         "name": "waivio_staging",
-        "port": 9998
+        "port": 9998,
+        "databases": [
+          { "db_num": 0, "keys": ["last_block_num"]},
+          { "db_num": 2, "keys": ["last_block_num","last_vote_block_num"]}
+        ]
       },
       {
         "name": "waivio_production",
-        "port": 9997
+        "port": 9997,
+        "databases": [
+          { "db_num": 0, "keys": ["last_block_num"]},
+          { "db_num": 2, "keys": ["last_block_num","last_vote_block_num"]}
+        ]
       }
-    ],
-    "lastBlockDbNum": 2
+    ]
   },
   "TELEGRAM_BOT_TOKEN": "917682508:AAHvWPUTT5VMrAgSkc04WVkcGSBQjUxcnjU",
-  "nodeUrls": [ "https://anyx.io", "https://api.steemit.com", "https://api.steem.house" ],
-  "NotifiesType": ["node-parser","notification-api", "campaigns-service"]
+  "nodeUrls": [
+    "https://anyx.io",
+    "https://api.steemit.com",
+    "https://api.steem.house"
+  ],
+  "NotifiesType": [
+    "waivio-node-parser",
+    "waivio-node-parser-votes",
+    "notification-api",
+    "campaigns-service",
+    "admin-service",
+    "promo-service"
+  ]
 }

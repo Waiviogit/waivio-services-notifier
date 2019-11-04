@@ -17,5 +17,6 @@
     ],
     "lastBlockDbNum": 2
   },
-  "TELEGRAM_BOT_TOKEN": "917682508:AAErIaCZwXRxxxKXIJa1YZ3GORpneAGObJk"
+  "TELEGRAM_BOT_TOKEN": "917682508:AAErIaCZwXRxxxKXIJa1YZ3GORpneAGObJk",
+  "nodeUrls": [ "https://anyx.io", "https://api.steemit.com", "https://api.steem.house" ]
 }

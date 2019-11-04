@@ -18,5 +18,6 @@
     "lastBlockDbNum": 2
   },
   "TELEGRAM_BOT_TOKEN": "917682508:AAHvWPUTT5VMrAgSkc04WVkcGSBQjUxcnjU",
-  "nodeUrls": [ "https://anyx.io", "https://api.steemit.com", "https://api.steem.house" ]
+  "nodeUrls": [ "https://anyx.io", "https://api.steemit.com", "https://api.steem.house" ],
+  "NotifiesType": ["node-parser","notification-api", "campaigns-service"]
 }

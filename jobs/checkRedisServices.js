@@ -1,6 +1,8 @@
-const cron = require('cron');
+const { CronJob } = require('cron');
 const { redisGetter, connector: { dbClients } } = require('../redis');
 const { getHeadBlockNum } = require('../utilities/steem');
+const { shareMessageBySubscribers } = require('../telegram/broadcasts');
+const _ = require('lodash');
 const BUFFER_BLOCK_COUNT = 100;
 
 const check = async () => {
@@ -25,9 +27,23 @@ const check = async () => {
 };
 
 const createWarningMessage = (server_name, db_num, key, actual_block = 0, expected_block = 0) => {
-    return `Warning on ${server_name} server, on DB number ${db_num} with key: ${key}!\n Delay for ${expected_block - actual_block} blocks`;
+    return `Warning on ${server_name} server, on DB number ${db_num} with key: ${key}.\n Delay for ${expected_block - actual_block} block(s).`;
 };
 const createSuccessMessage = (server_name, db_num, key, actual_block = 0, expected_block = 0) => {
-    return `Success on ${server_name} server, on DB number ${db_num} with key: ${key}!\n Delay for ${expected_block - actual_block} blocks`;
+    return `Success on ${server_name} server, on DB number ${db_num} with key: ${key}.\n Delay for ${expected_block - actual_block} block(s).`;
 };
 
+const job = new CronJob('0 */30 * * * *', async () => {
+    // check services every N minutes
+    const { success_messages, warn_messages } = await check();
+    for(const message of warn_messages) {
+        const res = await shareMessageBySubscribers(message);
+        if(_.get(res, 'error')) console.error(res.error);
+    }
+    // for(const message of success_messages) {
+    //     const res = await shareMessageBySubscribers(message);
+    //     if(_.get(res, 'error')) console.error(res.error);
+    // }
+}, null, true, null, null, true);
+
+job.start();

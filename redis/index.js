@@ -1,3 +1,4 @@
 module.exports = {
-    connector: require('./connector')
+    connector: require('./connector'),
+    redisGetter: require('./redisGetter')
 };

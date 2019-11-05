@@ -12,7 +12,7 @@ const check = async () => {
     for(const redisClient of dbClients) {
         for(const key of redisClient.lastBlockKeys) {
             const actualBlock = await redisGetter.getByKey(key, redisClient);
-            if(actualBlock + BUFFER_BLOCK_COUNT < head_block) {
+            if(+actualBlock + BUFFER_BLOCK_COUNT < head_block) {
                 warn_messages.push(
                     createWarningMessage(redisClient.info.server_name, redisClient.info.db_num, key, actualBlock, head_block)
                 );

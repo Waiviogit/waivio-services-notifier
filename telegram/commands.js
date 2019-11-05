@@ -34,8 +34,8 @@ app.command('subNotifications', async (ctx) => {
 app.command('status', async (ctx) => {
     console.log(`Command "/status" from ${ctx.from.id} in chat ${ctx.chat.id}`);
     const { success_messages, warn_messages } = await checkCurrentStatus();
-    let res_string = '-'.repeat(20) + '\n' + success_messages.join('\n') + '\n';
-    res_string += '-'.repeat(20) + '\n' + warn_messages.join('\n') + '-'.repeat(20);
+    let res_string = '-'.repeat(80) + '\n   SUCCESS MESSAGES  \n' + success_messages.join('\n' + '.'.repeat(80) + '\n') + '\n';
+    res_string += '-'.repeat(80) + '\n   WARNING MESSAGES  \n' + warn_messages.join('\n' + '.'.repeat(80) + '\n') + '-'.repeat(80);
     await ctx.replyWithMarkdown(res_string);
 });
 

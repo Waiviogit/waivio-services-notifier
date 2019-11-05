@@ -47,3 +47,5 @@ const job = new CronJob('0 */30 * * * *', async () => {
 }, null, true, null, null, true);
 
 job.start();
+
+module.exports = { check };

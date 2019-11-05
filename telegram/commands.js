@@ -2,6 +2,7 @@ const { app } = require('./index');
 const { nodeUrls, NotifiesType } = require('../config');
 const views = require('./views');
 const { clients } = require('../services');
+const { check: checkCurrentStatus } = require('../jobs/checkRedisServices');
 
 app.command('start', async (ctx) => {
     console.log(`Command "/start" from ${ctx.from.id} in chat ${ctx.chat.id}`);
@@ -28,6 +29,14 @@ app.command('subNotifications', async (ctx) => {
         console.error(`Error on "subNotifications" from chat ${ctx.chat.id}`);
         console.error(error);
     }
+});
+
+app.command('status', async (ctx) => {
+    console.log(`Command "/status" from ${ctx.from.id} in chat ${ctx.chat.id}`);
+    const { success_messages, warn_messages } = await checkCurrentStatus();
+    let res_string = '-'.repeat(20) + '\n' + success_messages.join('\n') + '\n';
+    res_string += '-'.repeat(20) + '\n' + warn_messages.join('\n') + '-'.repeat(20);
+    await ctx.replyWithMarkdown(res_string);
 });
 
 app.on('sticker', async (ctx) => {

@@ -19,6 +19,11 @@ app.command('help', async (ctx) => {
     await ctx.replyWithMarkdown(views.HELP_MESSAGE);
 });
 
+app.command('apilinks', async (ctx) => {
+    console.log(`Command "/apilinks" from ${ctx.from.id} in chat ${ctx.chat.id}`);
+    await ctx.replyWithMarkdown(views.APILINKS_MESSAGE);
+});
+
 app.command('subNotifications', async (ctx) => {
     console.log(`Command "/subNotifications" from ${ctx.from.id} in chat ${ctx.chat.id}`);
     const { result, error } = await clients.updateSubscribedNotifies({ client_id: ctx.chat.id, subscribedNotifies: [ ...NotifiesType ] });

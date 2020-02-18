@@ -10,5 +10,7 @@ exports.APILINKS_MESSAGE = [ 'WAIVIO Docs links:',
     ' - https://app.swaggerhub.com/apis-docs/waivio/waivio-api/1.0.0',
     ' - https://app.swaggerhub.com/apis-docs/waivio/investarena-api/1.0.0',
     ' - https://app.swaggerhub.com/apis-docs/waivio/objects-bot/1.0.0',
-    ' - https://app.swaggerhub.com/apis-docs/waiviogit/waivio-admin-api/1.0.0' ].join('\n');
+    ' - https://app.swaggerhub.com/apis-docs/waiviogit/waivio-admin-api/1.0.0',
+    ' - https://app.swaggerhub.com/apis-docs/waiviogit/quick-forecasts/1',
+    ' - https://waiviodev.com/campaigns-api/api-docs/' ].join('\n');
 

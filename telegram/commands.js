@@ -3,6 +3,7 @@ const { nodeUrls, NotifiesType } = require('../config');
 const views = require('./views');
 const { clients } = require('../services');
 const { check: checkCurrentStatus } = require('../jobs/checkRedisServices');
+const Markup = require('telegraf/markup');
 
 app.command('start', async (ctx) => {
     console.log(`Command "/start" from ${ctx.from.id} in chat ${ctx.chat.id}`);
@@ -16,12 +17,25 @@ app.command('nodes', async (ctx) => {
 
 app.command('help', async (ctx) => {
     console.log(`Command "/help" from ${ctx.from.id} in chat ${ctx.chat.id}`);
-    await ctx.replyWithMarkdown(views.HELP_MESSAGE);
+    await ctx.reply(views.HELP_MESSAGE, Markup
+        .keyboard([
+            [ '/nodes', '/help' ],
+            [ '/subNotifications', '/status' ],
+            [ '/apilinks' ]
+        ])
+        .oneTime()
+        .resize()
+        .extra()
+    );
 });
 
 app.command('apilinks', async (ctx) => {
     console.log(`Command "/apilinks" from ${ctx.from.id} in chat ${ctx.chat.id}`);
-    await ctx.replyWithMarkdown(views.APILINKS_MESSAGE);
+    await ctx.reply(views.APILINKS_MESSAGE,
+        Markup.inlineKeyboard([
+            ...views.LIST_APILINKS.map(api => [ Markup.urlButton(api.name, api.link) ])
+        ]).extra()
+    );
 });
 
 app.command('subNotifications', async (ctx) => {

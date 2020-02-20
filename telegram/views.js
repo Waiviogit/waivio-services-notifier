@@ -13,6 +13,7 @@ exports.LIST_APILINKS = [
     { name: 'objects-bot-api', link: 'https://app.swaggerhub.com/apis-docs/waivio/objects-bot/1.0.0' },
     { name: 'waivio-admin-api', link: 'https://app.swaggerhub.com/apis-docs/waiviogit/waivio-admin-api/1.0.0' },
     { name: 'quick-forecast-api', link: 'https://app.swaggerhub.com/apis-docs/waiviogit/quick-forecasts/1' },
-    { name: 'campaigns-api', link: 'https://waiviodev.com/campaigns-api/api-docs/' }
+    { name: 'campaigns-api', link: 'https://waiviodev.com/campaigns-api/api-docs/' },
+    { name: 'auth-service', link: 'https://waiviodev.com/auth-service/docs/' }
 ];
 

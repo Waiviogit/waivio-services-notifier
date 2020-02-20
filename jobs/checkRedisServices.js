@@ -27,10 +27,10 @@ const check = async () => {
 };
 
 const createWarningMessage = (server_name, db_num, key, actual_block = 0, expected_block = 0) => {
-    return `Warning on ${server_name} server, on DB number ${db_num} with key: ${key}.\n Delay for ${expected_block - actual_block} block(s).`;
+    return `Warning on \`${server_name}\` server, on DB number \`${db_num}\` with key: ${key}.\n Delay for ${expected_block - actual_block} block(s).`;
 };
 const createSuccessMessage = (server_name, db_num, key, actual_block = 0, expected_block = 0) => {
-    return `Success on ${server_name} server, on DB number ${db_num} with key: ${key}.\n Delay for ${expected_block - actual_block} block(s).`;
+    return `Success on \`${server_name}\` server, on DB number \`${db_num}\` with key: ${key}.\n Delay for ${expected_block - actual_block} block(s).`;
 };
 
 const job = new CronJob('0 */30 * * * *', async () => {

@@ -3,7 +3,7 @@ const bluebird = require('bluebird');
 const { nodeUrls } = require('../../config');
 
 bluebird.promisifyAll(steem.api);
-steem.api.setOptions({ url: nodeUrls[ 0 ] });
+steem.api.setOptions({ url: nodeUrls[ 1 ] });
 
 const changeNodeUrl = () => {
     const index = nodeUrls.indexOf(steem.config.url);

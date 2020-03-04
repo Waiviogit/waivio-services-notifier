@@ -17,7 +17,7 @@
         "name": "waivio_production",
         "port": 9999,
         "databases": [
-          { "db_num": 2, "keys": ["las3t_block_num","last_vote_block_num", "forecasts_block_num", "campaign_last_block_num"]}
+          { "db_num": 2, "keys": ["last_block_num","last_vote_block_num", "forecasts_block_num", "campaign_last_block_num"]}
         ]
       }
     ]

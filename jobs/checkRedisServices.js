@@ -27,7 +27,7 @@ const check = async () => {
     }
     const { successMsg, warnMsg } = await checkImportService('import_wobjects', importRsmqClient, MAX_IMP_QUEUE_LENGTH);
     if (successMsg) success_messages.push(successMsg);
-    if (warn_messages) warn_messages.push(warnMsg);
+    if (warnMsg) warn_messages.push(warnMsg);
     return { success_messages, warn_messages };
 };
 
@@ -35,7 +35,7 @@ const checkImportService = async (qname, client, queueLength) => {
     try{
         const attributes = await client.getQueueAttributesAsync({ qname });
         if (attributes.msgs > queueLength) {
-            return { warnMsg: `Warning on ${qname} queue, max allowed length ${queueLength}, now queue size ${attributes.msgs}` };
+            return { warnMsg: `Warning on \`${qname}\` queue, max allowed length \`${queueLength}\`, now queue size \`${attributes.msgs}\`` };
         }
         return { successMsg: `Success on ${qname} queue, max allowed length ${queueLength}, now queue size ${attributes.msgs}` };
     } catch (e) {
@@ -61,7 +61,7 @@ const job = new CronJob('0 */30 * * * *', async () => {
     //     const res = await shareMessageBySubscribers(message);
     //     if(_.get(res, 'error')) console.error(res.error);
     // }
-}, null, true, null, null, true);
+}, null, true, null, null, false);
 
 job.start();
 

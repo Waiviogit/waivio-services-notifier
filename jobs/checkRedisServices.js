@@ -35,9 +35,9 @@ const checkImportService = async (qname, client, queueLength) => {
     try{
         const attributes = await client.getQueueAttributesAsync({ qname });
         if (attributes.msgs > queueLength) {
-            return { warnMsg: `Warning on \`${qname}\` queue, max allowed length \`${queueLength}\`.\n Now queue size \`${attributes.msgs}\`` };
+            return { warnMsg: `Warning on \`${qname}\` queue, max allowed length \`${queueLength}\`.\n Now queue size \`${attributes.msgs}\`.` };
         }
-        return { successMsg: `Success on \`${qname}\` queue, max allowed length \`${queueLength}\`.\n Now queue size ${attributes.msgs}\`` };
+        return { successMsg: `Success on \`${qname}\` queue, max allowed length \`${queueLength}\`.\n Now queue size ${attributes.msgs}\`.` };
     } catch (e) {
         return { warnMsg: e.message };
     }

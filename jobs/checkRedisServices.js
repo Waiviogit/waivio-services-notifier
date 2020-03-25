@@ -1,9 +1,11 @@
 const { CronJob } = require('cron');
 const { redisGetter, connector: { dbClients } } = require('../redis');
+const { importRsmqClient } = require('../redis/rsmq');
 const { getHeadBlockNum } = require('../utilities/steem');
 const { shareMessageBySubscribers } = require('../telegram/broadcasts');
 const _ = require('lodash');
 const BUFFER_BLOCK_COUNT = 100;
+const MAX_IMP_QUEUE_LENGTH = 50;
 
 const check = async () => {
     const success_messages = [];
@@ -23,7 +25,22 @@ const check = async () => {
             }
         }
     }
+    const { successMsg, warnMsg } = await checkImportService('import_wobjects', importRsmqClient, MAX_IMP_QUEUE_LENGTH);
+    if (successMsg) success_messages.push(successMsg);
+    if (warn_messages) warn_messages.push(warnMsg);
     return { success_messages, warn_messages };
+};
+
+const checkImportService = async (qname, client, queueLength) => {
+    try{
+        const attributes = await client.getQueueAttributesAsync({ qname });
+        if (attributes.msgs > queueLength) {
+            return { warnMsg: `Warning on ${qname} queue, max allowed length ${queueLength}, now queue size ${attributes.msgs}` };
+        }
+        return { successMsg: `Success on ${qname} queue, max allowed length ${queueLength}, now queue size ${attributes.msgs}` };
+    } catch (e) {
+        return { warnMsg: e.message };
+    }
 };
 
 const createWarningMessage = (server_name, db_num, key, actual_block = 0, expected_block = 0) => {

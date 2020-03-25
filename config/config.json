@@ -20,13 +20,17 @@
           { "db_num": 2, "keys": ["last_block_num","last_vote_block_num", "forecasts_block_num", "campaign_last_block_num"]}
         ]
       }
-    ]
+    ],
+    "importServer" : {
+      "name": "waivio_production",
+      "port": 9999,
+      "db_num": 3
+    }
   },
   "TELEGRAM_BOT_TOKEN": "917682508:AAHvWPUTT5VMrAgSkc04WVkcGSBQjUxcnjU",
   "nodeUrls": [
-    "https://anyx.io",
-    "https://api.steemit.com",
-    "https://api.steem.house"
+    "https://rpc.esteem.app",
+    "https://anyx.io"
   ],
   "NotifiesType": [
     "waivio-node-parser",

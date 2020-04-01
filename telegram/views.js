@@ -14,6 +14,7 @@ exports.LIST_APILINKS = [
     { name: 'waivio-admin-api', link: 'https://waiviodev.com/admin-api/docs/' },
     { name: 'quick-forecast-api', link: 'https://www.investarena.com/quick-forecasts/docs/' },
     { name: 'campaigns-api', link: 'https://waiviodev.com/campaigns-api/api-docs/' },
-    { name: 'auth-service', link: 'https://waiviodev.com/auth-service/docs/' }
+    { name: 'auth-service', link: 'https://waiviodev.com/auth-service/docs/' },
+    { name: 'currencies-api', link: 'https://waiviodev.com/currencies-api/docs/' }
 ];
 

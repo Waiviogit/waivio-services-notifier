@@ -3,7 +3,7 @@ const validators = require('./validators');
 
 const notifications = async (req, res, next) => {
     const { params, validationError } = validators.validate(
-        req.body, validators.notifications.sentrySchema
+        req.query, validators.notifications.sentrySchema
     );
     if (validationError) return next({ status: 422, message: validationError.message });
     await sentryHelper.sendSentryError(params);

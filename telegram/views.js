@@ -3,7 +3,8 @@ exports.HELP_MESSAGE = [ '/help - show this page',
     '/nodes - show active nodes list',
     '/subNotifications - subscribe for services fall notifications',
     '/status - current status of Waivio services',
-    '/apilinks - list of Waivio docs' ].join('\n');
+    '/apilinks - list of Waivio docs',
+    '/subSentry - to subscribe to sentry errors' ].join('\n');
 exports.START_MESSAGE = 'Welcome to waivio notify bot!\nUse /help to show info.';
 exports.SUB_NOTIFICATIONS_MESSAGE = 'Now you\'ll be notified when one of services has fall down';
 exports.SENTRY_NOTIFICATIONS_MESSAGE = 'Now you\'ll be notified when one of services has will get an exception';

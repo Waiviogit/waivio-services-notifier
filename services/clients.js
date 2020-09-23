@@ -22,7 +22,7 @@ exports.updateSubscribedNotifies = async ({ client_id, subscribedNotifies }) => 
     try {
         const result = await clientModel.updateOne(
             { client_id },
-            { subscribedNotifies },
+            { $addToSet: { $each: { subscribedNotifies } } },
             { upsert: true, setDefaultsOnInsert: true }
         );
         return { result };

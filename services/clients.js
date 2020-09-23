@@ -35,7 +35,7 @@ exports.addSubscribedNotifications = async ({ client_id, subscribedNotifies }) =
     try {
         const result = await clientModel.updateOne(
             { client_id },
-            { $push: { subscribedNotifies } },
+            { $addToSet: { subscribedNotifies } },
             { upsert: true, setDefaultsOnInsert: true }
         );
         return { result };

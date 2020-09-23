@@ -1,6 +1,6 @@
 
 
 exports.APP_DATA = {
-    'waivio-api': 5433379,
-    'waivio-campaigns': 5433370
+    'waivioApi': 5433379,
+    'waivioCampaigns': 5433370
 };

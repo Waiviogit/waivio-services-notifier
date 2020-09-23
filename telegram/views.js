@@ -6,6 +6,7 @@ exports.HELP_MESSAGE = [ '/help - show this page',
     '/apilinks - list of Waivio docs' ].join('\n');
 exports.START_MESSAGE = 'Welcome to waivio notify bot!\nUse /help to show info.';
 exports.SUB_NOTIFICATIONS_MESSAGE = 'Now you\'ll be notified when one of services has fall down';
+exports.SENTRY_NOTIFICATIONS_MESSAGE = 'Now you\'ll be notified when one of services has will get an exception';
 exports.APILINKS_MESSAGE = 'WAIVIO Docs links:';
 exports.LIST_APILINKS = [
     { name: 'waivio-api', link: 'https://waiviodev.com/api/docs' },

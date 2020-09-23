@@ -31,9 +31,32 @@ exports.updateSubscribedNotifies = async ({ client_id, subscribedNotifies }) => 
     }
 };
 
+exports.addSubscribedNotifications = async ({ client_id, subscribedNotifies }) => {
+    try {
+        const result = await clientModel.updateOne(
+            { client_id },
+            { $push: { subscribedNotifies } },
+            { upsert: true, setDefaultsOnInsert: true }
+        );
+        return { result };
+    } catch (error) {
+        return { error };
+    }
+};
+
+
 exports.getAllSubscribers = async () => {
     try {
         const clients = await clientModel.find({ subscribedNotifies: { $exists: true, $ne: [] } }).lean();
+        return { clients };
+    } catch (error) {
+        return { error };
+    }
+};
+
+exports.getSpecificSubscribers = async (type) => {
+    try {
+        const clients = await clientModel.find({ subscribedNotifies: type }).lean();
         return { clients };
     } catch (error) {
         return { error };

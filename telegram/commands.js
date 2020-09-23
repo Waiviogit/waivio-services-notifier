@@ -4,6 +4,7 @@ const views = require('./views');
 const { clients } = require('../services');
 const { check: checkCurrentStatus } = require('../jobs/checkRedisServices');
 const Markup = require('telegraf/markup');
+const { SENTRY_SUBSCRIBE } = require('../constants/notificationsType');
 
 app.command('start', async (ctx) => {
     console.log(`Command "/start" from ${ctx.from.id} in chat ${ctx.chat.id}`);
@@ -21,7 +22,7 @@ app.command('help', async (ctx) => {
         .keyboard([
             [ '/nodes', '/help' ],
             [ '/subNotifications', '/status' ],
-            [ '/apilinks' ]
+            [ '/apilinks', '/subSentry' ]
         ])
         .oneTime()
         .resize()
@@ -46,6 +47,18 @@ app.command('subNotifications', async (ctx) => {
     }else{
         await ctx.replyWithMarkdown('Something went wrong!');
         console.error(`Error on "subNotifications" from chat ${ctx.chat.id}`);
+        console.error(error);
+    }
+});
+
+app.command('subSentry', async (ctx) => {
+    console.log(`Command "/subSentry" from ${ctx.from.id} in chat ${ctx.chat.id}`);
+    const { result, error } = await clients.addSubscribedNotifications({ client_id: ctx.chat.id, subscribedNotifies: SENTRY_SUBSCRIBE });
+    if(result.ok) {
+        await ctx.replyWithMarkdown(views.SENTRY_NOTIFICATIONS_MESSAGE);
+    }else{
+        await ctx.replyWithMarkdown('Something went wrong!');
+        console.error(`Error on "subSentry" from chat ${ctx.chat.id}`);
         console.error(error);
     }
 });

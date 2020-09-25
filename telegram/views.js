@@ -1,6 +1,6 @@
 exports.HELP_MESSAGE = [ 'help - show this page',
     '/start - start bot',
-    '/nodes - show active nodes list',
+    // '/nodes - show active nodes list',
     '/status - current status of Waivio services',
     '/subscribe - choose which notifications you want to subscribe to',
     '/unsubscribe - choose which notifications you want to unsubscribe',

@@ -21,18 +21,17 @@ app.command('start', async (ctx) => {
     await ctx.replyWithMarkdown(views.START_MESSAGE);
 });
 
-app.command('nodes', async (ctx) => {
-    console.log(`Command "/nodes" from ${ctx.from.id} in chat ${ctx.chat.id}`);
-    await ctx.replyWithMarkdown(JSON.stringify(nodeUrls));
-});
+// app.command('nodes', async (ctx) => {
+//     console.log(`Command "/nodes" from ${ctx.from.id} in chat ${ctx.chat.id}`);
+//     await ctx.replyWithMarkdown(JSON.stringify(nodeUrls));
+// });
 
 app.command([ 'help', 'back' ], async (ctx) => {
     console.log(`Command "/help" from ${ctx.from.id} in chat ${ctx.chat.id}`);
     await ctx.reply(views.HELP_MESSAGE, Markup
         .keyboard([
-            [ '/nodes', '/help' ],
-            [ '/apilinks', '/status' ],
-            [ '/subscribe' ]
+            [ '/help', '/subscribe' ],
+            [ '/apilinks', '/status' ]
         ])
         .oneTime()
         .resize()

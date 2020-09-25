@@ -20,9 +20,9 @@ app.command([ 'help', 'back' ], async (ctx) => {
     console.log(`Command "/help" from ${ctx.from.id} in chat ${ctx.chat.id}`);
     await ctx.reply(views.HELP_MESSAGE, Markup
         .keyboard([
-            [ 'nodes', 'help' ],
-            [ 'subscribe', 'unsubscribe' ],
-            [ 'apilinks', 'status' ]
+            [ '/nodes', '/help' ],
+            [ '/apilinks', '/status' ],
+            [ '/subscribe' ]
         ])
         .oneTime()
         .resize()

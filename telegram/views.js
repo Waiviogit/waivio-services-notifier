@@ -1,10 +1,10 @@
 exports.HELP_MESSAGE = [ 'help - show this page',
-    'start - start bot',
-    'nodes - show active nodes list',
-    'status - current status of Waivio services',
-    'subscribe - choose which notifications you want to subscribe to',
-    'unsubscribe - choose which notifications you want to unsubscribe',
-    'apilinks - list of Waivio docs'
+    '/start - start bot',
+    '/nodes - show active nodes list',
+    '/status - current status of Waivio services',
+    '/subscribe - choose which notifications you want to subscribe to',
+    '/unsubscribe - choose which notifications you want to unsubscribe',
+    '/apilinks - list of Waivio docs'
 ].join('\n');
 exports.START_MESSAGE = 'Welcome to waivio notify bot!\nUse /help to show info.';
 exports.SUB_NOTIFICATIONS_MESSAGE = 'Now you\'ll be notified when one of services has fall down';

@@ -72,8 +72,7 @@ app.command('subNodeStatuses', async (ctx) => {
 app.command('subSentry', async (ctx) => {
     console.log(`Command "/subSentry" from ${ctx.from.id} in chat ${ctx.chat.id}`);
     const { client } = await clients.getOne({ client_id: ctx.from.id });
-    const subMarker = client.subscribedNotifies.includes(NotifiesType[ 0 ]);
-
+    const subMarker = client.subscribedNotifies.includes(SENTRY_SUBSCRIBE);
     const { result, error } = await clients.updateSubscribedNotifies({ client_id: ctx.chat.id, subscribedNotifies: [ SENTRY_SUBSCRIBE ], push: !subMarker });
     if(result.ok) {
         await ctx.reply(!subMarker ? views.SENTRY_NOTIFICATIONS_MESSAGE : views.UNSUB_MESSAGE, await getSubscribeKeyboard(ctx));

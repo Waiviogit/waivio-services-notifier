@@ -6,10 +6,11 @@ const { check: checkCurrentStatus } = require('../jobs/checkRedisServices');
 const Markup = require('telegraf/markup');
 const { SENTRY_SUBSCRIBE } = require('../constants/notificationsType');
 
-const getSubscribeKeyboard = (client) => {
+const getSubscribeKeyboard = async (ctx) => {
+    const { client } = await clients.getOne({ client_id: ctx.from.id });
     return { reply_markup: { resize_keyboard: true, keyboard: [
-        [ { text: `/subNodeStatuses ${client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '✖'}` },
-            { text: `/subSentry ${client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '✖'}` } ],
+        [ { text: `/subNodeStatuses ${client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '❌'}` },
+            { text: `/subSentry ${client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '❌'}` } ],
         [ { text: '/back' } ]
     ] } };
 };
@@ -50,8 +51,7 @@ app.command('apilinks', async (ctx) => {
 
 
 app.command('subscribe', async (ctx) => {
-    const { client } = await clients.getOne({ client_id: ctx.from.id });
-    await ctx.reply(views.SUBSCRIBE_MESSAGE, getSubscribeKeyboard(client));
+    await ctx.reply(views.SUBSCRIBE_MESSAGE, await getSubscribeKeyboard(ctx));
 });
 
 app.command('subNodeStatuses', async (ctx) => {
@@ -61,7 +61,7 @@ app.command('subNodeStatuses', async (ctx) => {
     const subMarker = client.subscribedNotifies.includes(NotifiesType[ 0 ]);
     const { result, error } = await clients.updateSubscribedNotifies({ client_id: ctx.chat.id, subscribedNotifies: NotifiesType, push: !subMarker });
     if(result.ok) {
-        await ctx.reply(!subMarker ? views.SUB_NOTIFICATIONS_MESSAGE : views.UNSUB_MESSAGE, getSubscribeKeyboard(client));
+        await ctx.reply(!subMarker ? views.SUB_NOTIFICATIONS_MESSAGE : views.UNSUB_MESSAGE, await getSubscribeKeyboard(ctx));
     }else{
         await ctx.replyWithMarkdown('Something went wrong!');
         console.error(`Error on "subNotifications" from chat ${ctx.chat.id}`);
@@ -76,7 +76,7 @@ app.command('subSentry', async (ctx) => {
 
     const { result, error } = await clients.updateSubscribedNotifies({ client_id: ctx.chat.id, subscribedNotifies: [ SENTRY_SUBSCRIBE ], push: !subMarker });
     if(result.ok) {
-        await ctx.reply(!subMarker ? views.SENTRY_NOTIFICATIONS_MESSAGE : views.UNSUB_MESSAGE, getSubscribeKeyboard(client));
+        await ctx.reply(!subMarker ? views.SENTRY_NOTIFICATIONS_MESSAGE : views.UNSUB_MESSAGE, await getSubscribeKeyboard(ctx));
     }else{
         await ctx.replyWithMarkdown('Something went wrong!');
         console.error(`Error on "subSentry" from chat ${ctx.chat.id}`);

@@ -11,7 +11,7 @@ exports.SUB_NOTIFICATIONS_MESSAGE = 'Now you\'ll be notified when one of service
 exports.UNSUB_MESSAGE = 'You have successfully unsubscribed';
 exports.SENTRY_NOTIFICATIONS_MESSAGE = 'Now you\'ll be notified when one of services has will get an exception';
 exports.APILINKS_MESSAGE = 'WAIVIO Docs links:';
-exports.SUBSCRIBE_MESSAGE = 'Choose which notifications you want to subscribe to: ';
+exports.SUBSCRIBE_MESSAGE = 'Choose which notifications you want to subscribe to: (✔️ - you already subscribed, ❌ - you are not subscribed)';
 exports.LIST_APILINKS = [
     { name: 'waivio-api', link: 'https://waiviodev.com/api/docs' },
     { name: 'investarena-api', link: 'https://investarena.waiviodev.com/investarena-api/docs/' },

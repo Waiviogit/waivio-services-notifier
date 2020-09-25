@@ -10,7 +10,7 @@ const getSubscribeKeyboard = async (ctx) => {
     const { client } = await clients.getOne({ client_id: ctx.from.id });
     return { reply_markup: { resize_keyboard: true, keyboard: [
         [ { text: `/subNodeStatuses ${client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '❌'}` },
-            { text: `/subSentry ${client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '❌'}` } ],
+            { text: `/subSentry ${client.subscribedNotifies.includes(SENTRY_SUBSCRIBE) ? '✔' : '❌'}` } ],
         [ { text: '/back' } ]
     ] } };
 };

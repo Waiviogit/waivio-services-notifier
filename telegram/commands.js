@@ -44,9 +44,9 @@ app.command('apilinks', async (ctx) => {
 app.command([ 'subscribe', 'unsubscribe' ], async (ctx) => {
     const { client } = await clients.getOne({ client_id: ctx.from.id });
     await ctx.reply(views.SUBSCRIBE_MESSAGE, { reply_markup: { resize_keyboard: true, keyboard: [
-        [ { text: 'subNodeStatuses ' + client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '✖' },
-            { text: 'subSentry ' + client.subscribedNotifies.includes(SENTRY_SUBSCRIBE) ? '✔' : '✖' } ],
-        [ { text: 'back' } ]
+        [ { text: `/subNodeStatuses ${client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '✖'}` },
+            { text: `/subSentry ${client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '✖'}` } ],
+        [ { text: '/back' } ]
     ] } }
     );
 });

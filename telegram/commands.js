@@ -17,6 +17,7 @@ const getSubscribeKeyboard = async (ctx) => {
 
 app.command('start', async (ctx) => {
     console.log(`Command "/start" from ${ctx.from.id} in chat ${ctx.chat.id}`);
+    await clients.Create({ client_id: ctx.from.id });
     await ctx.replyWithMarkdown(views.START_MESSAGE);
 });
 

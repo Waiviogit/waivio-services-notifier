@@ -16,19 +16,20 @@ app.command('nodes', async (ctx) => {
     await ctx.replyWithMarkdown(JSON.stringify(nodeUrls));
 });
 
-app.command('help', async (ctx) => {
+app.command([ 'help', 'back' ], async (ctx) => {
     console.log(`Command "/help" from ${ctx.from.id} in chat ${ctx.chat.id}`);
     await ctx.reply(views.HELP_MESSAGE, Markup
         .keyboard([
-            [ '/nodes', '/help' ],
-            [ '/subNotifications', '/status' ],
-            [ '/apilinks', '/subSentry' ]
+            [ 'nodes', 'help' ],
+            [ 'subscribe', 'unsubscribe' ],
+            [ 'apilinks', 'status' ]
         ])
         .oneTime()
         .resize()
         .extra()
     );
 });
+
 
 app.command('apilinks', async (ctx) => {
     console.log(`Command "/apilinks" from ${ctx.from.id} in chat ${ctx.chat.id}`);
@@ -39,11 +40,25 @@ app.command('apilinks', async (ctx) => {
     );
 });
 
-app.command('subNotifications', async (ctx) => {
-    console.log(`Command "/subNotifications" from ${ctx.from.id} in chat ${ctx.chat.id}`);
-    const { result, error } = await clients.updateSubscribedNotifies({ client_id: ctx.chat.id, subscribedNotifies: [ ...NotifiesType ] });
+
+app.command([ 'subscribe', 'unsubscribe' ], async (ctx) => {
+    const { client } = await clients.getOne({ client_id: ctx.from.id });
+    await ctx.reply(views.SUBSCRIBE_MESSAGE, { reply_markup: { resize_keyboard: true, keyboard: [
+        [ { text: 'subNodeStatuses ' + client.subscribedNotifies.includes(NotifiesType[ 0 ]) ? '✔' : '✖' },
+            { text: 'subSentry ' + client.subscribedNotifies.includes(SENTRY_SUBSCRIBE) ? '✔' : '✖' } ],
+        [ { text: 'back' } ]
+    ] } }
+    );
+});
+
+app.command('subNodeStatuses', async (ctx) => {
+
+    console.log(`Command "/subNodeStatuses" from ${ctx.from.id} in chat ${ctx.chat.id}`);
+    const { client } = await clients.getOne({ client_id: ctx.from.id });
+    const subMarker = client.subscribedNotifies.includes(NotifiesType[ 0 ]);
+    const { result, error } = await clients.updateSubscribedNotifies({ client_id: ctx.chat.id, subscribedNotifies: NotifiesType, push: !subMarker });
     if(result.ok) {
-        await ctx.replyWithMarkdown(views.SUB_NOTIFICATIONS_MESSAGE);
+        await ctx.replyWithMarkdown(!subMarker ? views.SUB_NOTIFICATIONS_MESSAGE : views.UNSUB_MESSAGE);
     }else{
         await ctx.replyWithMarkdown('Something went wrong!');
         console.error(`Error on "subNotifications" from chat ${ctx.chat.id}`);
@@ -53,9 +68,12 @@ app.command('subNotifications', async (ctx) => {
 
 app.command('subSentry', async (ctx) => {
     console.log(`Command "/subSentry" from ${ctx.from.id} in chat ${ctx.chat.id}`);
-    const { result, error } = await clients.addSubscribedNotifications({ client_id: ctx.chat.id, subscribedNotifies: SENTRY_SUBSCRIBE });
+    const { client } = await clients.getOne({ client_id: ctx.from.id });
+    const subMarker = client.subscribedNotifies.includes(NotifiesType[ 0 ]);
+
+    const { result, error } = await clients.updateSubscribedNotifies({ client_id: ctx.chat.id, subscribedNotifies: [ SENTRY_SUBSCRIBE ], push: !subMarker });
     if(result.ok) {
-        await ctx.replyWithMarkdown(views.SENTRY_NOTIFICATIONS_MESSAGE);
+        await ctx.replyWithMarkdown(!subMarker ? views.SENTRY_NOTIFICATIONS_MESSAGE : views.UNSUB_MESSAGE);
     }else{
         await ctx.replyWithMarkdown('Something went wrong!');
         console.error(`Error on "subSentry" from chat ${ctx.chat.id}`);

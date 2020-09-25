@@ -18,24 +18,11 @@ exports.Create = async ({ client_id, type, subscribedNotifies }) => {
     }
 };
 
-exports.updateSubscribedNotifies = async ({ client_id, subscribedNotifies }) => {
+exports.updateSubscribedNotifies = async ({ client_id, subscribedNotifies, push }) => {
     try {
         const result = await clientModel.updateOne(
             { client_id },
-            { $addToSet: { $each: { subscribedNotifies } } },
-            { upsert: true, setDefaultsOnInsert: true }
-        );
-        return { result };
-    } catch (error) {
-        return { error };
-    }
-};
-
-exports.addSubscribedNotifications = async ({ client_id, subscribedNotifies }) => {
-    try {
-        const result = await clientModel.updateOne(
-            { client_id },
-            { $addToSet: { subscribedNotifies } },
+            { [ push ? '$addToSet' : '$pull' ]: { $each: { subscribedNotifies } } },
             { upsert: true, setDefaultsOnInsert: true }
         );
         return { result };

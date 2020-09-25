@@ -29,8 +29,9 @@
   },
   "TELEGRAM_BOT_TOKEN": "917682508:AAHvWPUTT5VMrAgSkc04WVkcGSBQjUxcnjU",
   "nodeUrls": [
-    "https://rpc.esteem.app",
-    "https://anyx.io"
+    "https://blocks.waivio.com",
+    "https://anyx.io",
+    "https://rpc.esteem.app"
   ],
   "NotifiesType": [
     "waivio-node-parser",

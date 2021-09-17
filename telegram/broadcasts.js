@@ -30,3 +30,15 @@ exports.shareBySpecificSubscribers = async (type, message, id) => {
 
     }
 };
+
+exports.shareCustomMessageByType = async ({ type, message }) => {
+    const { clients: subClients, error } = await clients.getSpecificSubscribers(type);
+    if(error)return{ error };
+    for(const client of subClients) {
+        try {
+            await app.telegram.sendMessage(client.client_id, message);
+        }catch (e) {
+            console.error(e.message);
+        }
+    }
+};

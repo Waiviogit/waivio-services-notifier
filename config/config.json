@@ -27,7 +27,8 @@
       "db_num": 3
     }
   },
-  "TELEGRAM_BOT_TOKEN": "917682508:AAHvWPUTT5VMrAgSkc04WVkcGSBQjUxcnjU",
+//  "TELEGRAM_BOT_TOKEN": "917682508:AAHvWPUTT5VMrAgSkc04WVkcGSBQjUxcnjU",
+  "TELEGRAM_BOT_TOKEN": "5170998338:AAECx9r9rEIiMoXMCvxbkGlhCVqwCaTx3Ns",
   "nodeUrls": [
     "https://blocks.waivio.com",
     "https://anyx.io",

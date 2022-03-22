@@ -50,9 +50,12 @@ const createSuccessMessage = (server_name, db_num, key, actual_block = 0, expect
     return `Success on \`${server_name}\` server, on DB number ${db_num} with key: \`${key}\`.\n Delay for ${expected_block - actual_block} block(s).`;
 };
 
-const job = new CronJob('0 */30 * * * *', async () => {
+const job = new CronJob('*/1 * * * *', async () => {
     // check services every N minutes
+     console.log('here');
     const { success_messages, warn_messages } = await check();
+    console.log('success_messages', success_messages);
+    console.log('warn_messages', warn_messages);
     for(const message of warn_messages) {
         const res = await shareMessageBySubscribers(message);
         if(_.get(res, 'error')) console.error(res.error);

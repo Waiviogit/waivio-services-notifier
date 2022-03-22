@@ -18,7 +18,7 @@ const check = async () => {
         for(const key of _.get(redisClient, 'connection_options.last_block_keys')) {
             const actualBlock = await redisGetter.getByKey(key, redisClient);
             if (key === HIVE_ENGINE_REDIS_KEY) {
-                (actualBlock + BUFFER_BLOCK_COUNT) < head_block_hive_engine ? warn_messages.push(
+                (+actualBlock + BUFFER_BLOCK_COUNT) < head_block_hive_engine ? warn_messages.push(
                     createWarningMessage(
                         redisClient.connection_options.server_name,
                         redisClient.connection_options.db_num, key,

@@ -10,7 +10,7 @@ exports.shareMessageBySubscribers = async (message = '') => {
         try {
             await app.telegram.sendMessage(client.client_id, message);
         }catch (e) {
-            console.error(e.massage);
+            console.error(e.message);
         }
     }
 };

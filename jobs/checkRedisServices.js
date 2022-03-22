@@ -21,7 +21,8 @@ const check = async () => {
                 (+actualBlock + BUFFER_BLOCK_COUNT) < head_block_hive_engine ? warn_messages.push(
                     createWarningMessage(
                         redisClient.connection_options.server_name,
-                        redisClient.connection_options.db_num, key,
+                        redisClient.connection_options.db_num,
+                        key,
                         actualBlock,
                         head_block_hive_engine
                     )) : success_messages.push(

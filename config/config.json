@@ -10,14 +10,16 @@
         "name": "waivio_staging",
         "port": 6379,
         "databases": [
-          { "db_num": 2, "keys": ["last_block_num","last_vote_block_num", "forecasts_block_num", "campaign_last_block_num", "campaign_last_block_rest_num"]}
+          { "db_num": 2, "keys": ["last_block_num","last_vote_block_num", "forecasts_block_num",
+            "campaign_last_block_num", "campaign_last_block_rest_num", "engine_last_block"]}
         ]
       },
       {
         "name": "waivio_production",
         "port": 9999,
         "databases": [
-          { "db_num": 2, "keys": ["last_block_num","last_vote_block_num", "forecasts_block_num", "campaign_last_block_num", "campaign_last_block_rest_num"]}
+          { "db_num": 2, "keys": ["last_block_num","last_vote_block_num", "forecasts_block_num",
+            "campaign_last_block_num", "campaign_last_block_rest_num", "engine_last_block"]}
         ]
       }
     ],

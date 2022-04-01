@@ -13,3 +13,8 @@ exports.botRcSchema = Joi.object().keys({
     account: Joi.string().required(),
     rc: Joi.number().min(0).max(100).required()
 }).options(options);
+
+exports.cronMessageSchema = Joi.object().keys({
+    cron_service_key: Joi.string().valid(process.env.CRON_SERVICE_KEY),
+    message: Joi.string()
+}).options(options);

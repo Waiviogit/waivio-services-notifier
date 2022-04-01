@@ -2,9 +2,11 @@ const { app: telegram } = require('./telegram');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 require('./telegram/commands');
 require('./jobs/checkRedisServices');
 
+dotenv.config({ path: 'env/.env' });
 telegram.launch();
 console.log('BOT STARTED!');
 
@@ -17,7 +19,6 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use('/', router);
-
 app.use((req, res, next) => {
     res.status(res.result.status || 200).json(res.result.json);
 });

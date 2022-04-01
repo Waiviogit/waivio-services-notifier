@@ -20,3 +20,11 @@ exports.botRC = async (req, res, next) => {
     await shareMessageBySubscribers(message);
     res.status(200).json({ result: 'OK' });
 };
+
+exports.cronMessage = async (req, res, next) => {
+    const { params, validationError } = validators.validate(req.body, validators.notifications.cronMessageSchema);
+    if (validationError) return next({ status: 422, message: validationError.message });
+
+    await shareMessageBySubscribers(params.message);
+    res.status(200).json({ result: 'OK' });
+};

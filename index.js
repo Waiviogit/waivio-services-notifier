@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use('/', router);
+
 app.use((req, res, next) => {
     res.status(res.result.status || 200).json(res.result.json);
 });

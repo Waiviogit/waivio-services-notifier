@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 require('./telegram/commands');
 require('./jobs/checkRedisServices');
 
-dotenv.config({ path: 'env/.env' });
+dotenv.config();
 telegram.launch();
 console.log('BOT STARTED!');
 

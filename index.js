@@ -2,9 +2,11 @@ const { app: telegram } = require('./telegram');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 require('./telegram/commands');
 require('./jobs/checkRedisServices');
 
+dotenv.config();
 telegram.launch();
 console.log('BOT STARTED!');
 

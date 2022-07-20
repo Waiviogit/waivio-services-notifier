@@ -5,7 +5,7 @@ const { getHeadBlockNum } = require('../utilities/steem');
 const { shareMessageBySubscribers } = require('../telegram/broadcasts');
 const _ = require('lodash');
 const { getLastHiveEngineBlock } = require('../utilities/helpers/getLastHiveEngineBlockHelper');
-const { HIVE_ENGINE_REDIS_KEY } = require('../constants/hiveEngineRequestData');
+const { HIVE_ENGINE_REDIS_KEY, HIVE_ENGINE_ARBITRAGE } = require('../constants/hiveEngineRequestData');
 const BUFFER_BLOCK_COUNT = 100;
 const MAX_IMP_QUEUE_LENGTH = 50;
 
@@ -17,7 +17,7 @@ const check = async () => {
     for(const redisClient of dbClients) {
         for(const key of _.get(redisClient, 'connection_options.last_block_keys')) {
             const actualBlock = await redisGetter.getByKey(key, redisClient);
-            if (key === HIVE_ENGINE_REDIS_KEY) {
+            if (key === HIVE_ENGINE_REDIS_KEY || key === HIVE_ENGINE_ARBITRAGE) {
                 (+actualBlock + BUFFER_BLOCK_COUNT) < head_block_hive_engine ? warn_messages.push(
                     createWarningMessage(
                         redisClient.connection_options.server_name,

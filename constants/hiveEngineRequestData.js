@@ -8,3 +8,4 @@ exports.HIVE_ENGINE_REQUEST_DATA = {
 };
 
 exports.HIVE_ENGINE_REDIS_KEY = 'engine_last_block';
+exports.HIVE_ENGINE_ARBITRAGE = 'last_engine_block_for_arbitrage';

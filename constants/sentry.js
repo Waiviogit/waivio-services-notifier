@@ -7,5 +7,5 @@ exports.APP_DATA = {
     'nodeParser': 5438673,
     'objectsBot': 5438751,
     'waivio': 5439695,
-    'engineNodeParser': 4504525930889216,
+    'engineNodeParser': 4504525930889216
 };

@@ -7,7 +7,7 @@ const _ = require('lodash');
 const { getLastHiveEngineBlock } = require('../utilities/helpers/getLastHiveEngineBlockHelper');
 const { HIVE_ENGINE_REDIS_KEYS } = require('../constants/hiveEngineRequestData');
 const BUFFER_BLOCK_COUNT = 100;
-const MAX_IMP_QUEUE_LENGTH = 50;
+const MAX_IMP_QUEUE_LENGTH = 200;
 
 const check = async () => {
     const success_messages = [];

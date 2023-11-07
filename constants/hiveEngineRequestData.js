@@ -1,5 +1,5 @@
 exports.HIVE_ENGINE_REQUEST_DATA = {
-    blockchain_url: 'https://api.hive-engine.com/rpc/blockchain',
+    blockchain_url: 'https://herpc.dtools.dev/blockchain',
     blockchain_params: {
         id: 'ssc-mainnet-hive',
         jsonrpc: '2.0',
@@ -7,4 +7,4 @@ exports.HIVE_ENGINE_REQUEST_DATA = {
     }
 };
 
-exports.HIVE_ENGINE_REDIS_KEYS = [ 'engine_last_block', 'last_engine_block_for_arbitrage'];
+exports.HIVE_ENGINE_REDIS_KEYS = [ 'engine_last_block', 'last_engine_block_for_arbitrage' ];

@@ -13,4 +13,4 @@ services:
         max-file: '5'
         max-size: '10m'
     env_file:
-      - ./.env
+      - .env

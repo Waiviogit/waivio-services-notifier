@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 require('./telegram/commands');
 require('./jobs/checkRedisServices');
+require('./discord/discordBot');
 
 dotenv.config();
 telegram.launch();

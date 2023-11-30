@@ -1,3 +1,4 @@
 module.exports = {
-    clients: require('./clients')
+    clients: require('./clients'),
+    discordMessages: require('./discordMessages')
 };

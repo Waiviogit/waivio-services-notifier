@@ -37,4 +37,7 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 });
 // Log in to Discord
-client.login(process.env.DICORD_ENGINE_BOT);
+if(process.env.NODE_ENV === 'production') {
+    client.login(process.env.DICORD_ENGINE_BOT);
+}
+

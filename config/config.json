@@ -7,7 +7,7 @@
   "redis": {
     "servers": [
       {
-        "name": "waivio_production",
+        "name": "waivio",
         "port": 6379,
         "databases": [
           { "db_num": 2, "keys": ["last_block_num","last_vote_block_num",
@@ -16,7 +16,7 @@
       }
     ],
     "importServer" : {
-      "name": "waivio_production",
+      "name": "waivio",
       "port": 6379,
       "db_num": 3
     }

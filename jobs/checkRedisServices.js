@@ -1,4 +1,5 @@
 const { CronJob } = require('cron');
+const axios = require('axios');
 const { redisGetter, connector: { dbClients } } = require('../redis');
 const { importRsmqClient } = require('../redis/rsmq');
 const { getHeadBlockNum } = require('../utilities/steem');
@@ -47,8 +48,40 @@ const check = async () => {
     const { successMsg, warnMsg } = await checkImportService('import_wobjects', importRsmqClient, MAX_IMP_QUEUE_LENGTH);
     if (successMsg) success_messages.push(successMsg);
     if (warnMsg) warn_messages.push(warnMsg);
+    const {engineSuccess, engineWarning} = await checkEngineNode({head_block});
+    if (engineSuccess) success_messages.push(engineSuccess);
+    if (engineWarning) warn_messages.push(engineWarning);
     return { success_messages, warn_messages };
 };
+
+
+const checkEngineNode = async ({head_block}) => {
+    const host = 'https://engine.waivio.com';
+    let engineWarning = `Warning can't reach engine node ${host}`;
+
+    try {
+
+        const result = await axios.get(host, {
+            timeout: 5000
+        });
+
+        const currentHiveBlock = _.get(result, 'data.lastBlockRefHiveBlockNumber')
+        if(!currentHiveBlock) {
+            return {engineWarning};
+        }
+        const diff = head_block - currentHiveBlock
+        if(diff > 100) {
+            return {engineWarning: `Success on Engine node. Delay for ${diff} block(s).`}
+        }
+        return {
+            engineSuccess: `Warning on Engine node. Delay for ${diff} block(s).`
+        }
+
+
+    } catch (error) {
+      return {engineWarning};
+    }
+}
 
 const checkImportService = async (qname, client, queueLength) => {
     try{

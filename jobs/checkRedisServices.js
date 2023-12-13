@@ -57,7 +57,7 @@ const check = async () => {
 
 const checkEngineNode = async ({head_block}) => {
     const host = 'https://engine.waivio.com';
-    let engineWarning = `Warning can't reach engine node ${host}`;
+    let engineWarning = `Warning can't reach \`Engine node\` ${host}`;
 
     try {
 
@@ -71,10 +71,11 @@ const checkEngineNode = async ({head_block}) => {
         }
         const diff = head_block - currentHiveBlock
         if(diff > 100) {
-            return {engineWarning: `Success on Engine node. Delay for ${diff} block(s).`}
+            return {engineWarning: `Warning on \`Engine node\`. Delay for ${diff} block(s).`}
         }
+
         return {
-            engineSuccess: `Warning on Engine node. Delay for ${diff} block(s).`
+            engineSuccess: `Success on \`Engine node\`. Delay for ${diff} block(s).`
         }
 
 

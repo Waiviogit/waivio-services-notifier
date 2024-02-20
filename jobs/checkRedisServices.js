@@ -48,9 +48,9 @@ const check = async () => {
     const { successMsg, warnMsg } = await checkImportService('import_wobjects', importRsmqClient, MAX_IMP_QUEUE_LENGTH);
     if (successMsg) success_messages.push(successMsg);
     if (warnMsg) warn_messages.push(warnMsg);
-    const {engineSuccess, engineWarning} = await checkEngineNode({head_block});
-    if (engineSuccess) success_messages.push(engineSuccess);
-    if (engineWarning) warn_messages.push(engineWarning);
+    const engineNode = await checkEngineNode({head_block});
+    success_messages.push(engineNode);
+
     return { success_messages, warn_messages };
 };
 
@@ -67,20 +67,19 @@ const checkEngineNode = async ({head_block}) => {
 
         const currentHiveBlock = _.get(result, 'data.lastBlockRefHiveBlockNumber')
         if(!currentHiveBlock) {
-            return {engineWarning};
+          return   engineWarning
         }
         const diff = head_block - currentHiveBlock
         if(diff > 100) {
-            return {engineWarning: `Warning on \`Engine node\`. Delay for ${diff} block(s).`}
+            return `Warning on \`Engine node\`. Delay for ${diff} block(s).`
         }
 
-        return {
-            engineSuccess: `Success on \`Engine node\`. Delay for ${diff} block(s).`
-        }
+        return  `Success on \`Engine node\`. Delay for ${diff} block(s).`
+
 
 
     } catch (error) {
-      return {engineWarning};
+      return engineWarning;
     }
 }
 

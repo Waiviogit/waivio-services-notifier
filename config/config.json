@@ -10,8 +10,16 @@
         "name": "waivio",
         "port": 6379,
         "databases": [
-          { "db_num": 2, "keys": ["last_block_num","last_vote_block_num",
-            "campaign_last_block_num", "campaign_last_block_rest_num", "engine_last_block"]}
+          { "db_num": 2, "keys": [
+            "last_block_num",
+            "last_vote_block_num",
+            "campaign_last_block_num",
+            "campaign_last_block_rest_num",
+            "engine_last_block",
+            "campaign_v2_last_block",
+            "campaign_v2_engine_block"
+          ]
+          }
         ]
       }
     ],

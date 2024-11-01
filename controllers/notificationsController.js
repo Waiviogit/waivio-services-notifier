@@ -24,6 +24,7 @@ exports.botRC = async (req, res, next) => {
 exports.cronMessage = async (req, res, next) => {
     const { params, validationError } = validators.validate(req.body, validators.notifications.cronMessageSchema);
     if (validationError) return next({ status: 422, message: validationError.message });
+    if (process.env.CRON_SERVICE_KEY !== params.cron_service_key) return next({ status: 401, message: 'Not authorised' });
 
     await shareMessageBySubscribers(params.message);
     res.status(200).json({ result: 'OK' });

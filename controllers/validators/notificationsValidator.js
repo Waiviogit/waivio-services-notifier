@@ -15,6 +15,6 @@ exports.botRcSchema = Joi.object().keys({
 }).options(options);
 
 exports.cronMessageSchema = Joi.object().keys({
-    cron_service_key: Joi.string().valid(process.env.CRON_SERVICE_KEY),
+    cron_service_key: Joi.string(),
     message: Joi.string()
 }).options(options);

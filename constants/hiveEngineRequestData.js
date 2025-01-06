@@ -10,8 +10,8 @@ exports.HIVE_ENGINE_REQUEST_DATA = {
 exports.HIVE_ENGINE_REDIS_KEYS = [ 'engine_last_block', 'last_engine_block_for_arbitrage', 'campaign_v2_engine_block' ];
 
 exports.HIVE_ENGINE_NODES = [
-    'https://herpc.kanibot.com',
-    'https://engine.deathwing.me',
-    'https://he.sourov.dev',
+    'https://api.primersion.com',
+    'https://ha.herpc.dtools.dev',
+    'https://herpc.dtools.dev',
 ];
 

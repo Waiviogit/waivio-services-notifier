@@ -8,7 +8,7 @@ exports.shareMessageBySubscribers = async (message = '') => {
     if(error)return{ error };
     for(const client of subClients) {
         try {
-            await app.telegram.sendMessage(client.client_id, message);
+            await app.telegram.sendMessage(client.client_id, message, { parse_mode: 'MarkdownV2',});
         }catch (e) {
             console.error(e.message);
         }
@@ -36,7 +36,7 @@ exports.shareCustomMessageByType = async ({ type, message }) => {
     if(error)return{ error };
     for(const client of subClients) {
         try {
-            await app.telegram.sendMessage(client.client_id, message);
+            await app.telegram.sendMessage(client.client_id, message, { parse_mode: 'MarkdownV2',});
         }catch (e) {
             console.error(e.message);
         }

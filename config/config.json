@@ -31,9 +31,9 @@
   },
   "TELEGRAM_BOT_TOKEN": "917682508:AAHvWPUTT5VMrAgSkc04WVkcGSBQjUxcnjU",
   "nodeUrls": [
-    "https://blocks.waivio.com",
-    "https://anyx.io",
-    "https://rpc.esteem.app"
+    "https://api.deathwing.me",
+    "https://api.hive.blog",
+    "https://hive-api.arcange.eu"
   ],
   "NotifiesType": [
     "waivio-node-parser",

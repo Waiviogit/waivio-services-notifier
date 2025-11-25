@@ -3,6 +3,19 @@ const { clients } = require('../services');
 const extra = require('telegraf/extra');
 const markup = extra.markdown();
 
+
+exports.shareMessageBySubscribersNoParseMode = async (message = '') => {
+    const { clients: subClients, error } = await clients.getAllSubscribers();
+    if(error)return{ error };
+    for(const client of subClients) {
+        try {
+            await app.telegram.sendMessage(client.client_id, message);
+        }catch (e) {
+            console.error(e.message);
+        }
+    }
+};
+
 exports.shareMessageBySubscribers = async (message = '') => {
     const { clients: subClients, error } = await clients.getAllSubscribers();
     if(error)return{ error };

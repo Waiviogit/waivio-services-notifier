@@ -1,6 +1,6 @@
 const sentryHelper = require('../utilities/helpers/sentryHelper');
 const validators = require('./validators');
-const { shareMessageBySubscribers } = require('../telegram/broadcasts');
+const { shareMessageBySubscribers, shareMessageBySubscribersNoParseMode } = require('../telegram/broadcasts');
 
 exports.notifications = async (req, res, next) => {
     const { params, validationError } = validators.validate(
@@ -26,6 +26,6 @@ exports.cronMessage = async (req, res, next) => {
     if (validationError) return next({ status: 422, message: validationError.message });
     if (process.env.CRON_SERVICE_KEY !== params.cron_service_key) return next({ status: 401, message: 'Not authorised' });
 
-    await shareMessageBySubscribers(params.message);
+    await shareMessageBySubscribersNoParseMode(params.message);
     res.status(200).json({ result: 'OK' });
 };

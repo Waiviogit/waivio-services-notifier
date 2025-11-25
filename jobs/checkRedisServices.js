@@ -3,7 +3,7 @@ const axios = require('axios');
 const { redisGetter, connector: { dbClients } } = require('../redis');
 const { importRsmqClient } = require('../redis/rsmq');
 const { getHeadBlockNum } = require('../utilities/steem');
-const { shareMessageBySubscribers } = require('../telegram/broadcasts');
+const { shareMessageBySubscribersNoParseMode } = require('../telegram/broadcasts');
 const _ = require('lodash');
 const { getLastHiveEngineBlock } = require('../utilities/helpers/getLastHiveEngineBlockHelper');
 const { HIVE_ENGINE_REDIS_KEYS } = require('../constants/hiveEngineRequestData');
@@ -106,7 +106,7 @@ const job = new CronJob('0 */30 * * * *', async () => {
     // check services every N minutes
     const { success_messages, warn_messages } = await check();
     for(const message of warn_messages) {
-        const res = await shareMessageBySubscribers(message);
+        const res = await shareMessageBySubscribersNoParseMode(message);
         if(_.get(res, 'error')) console.error(res.error);
     }
     // for(const message of success_messages) {

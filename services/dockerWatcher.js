@@ -1,7 +1,6 @@
 const Docker = require('dockerode');
 const os = require('os');
 const config = require('../config/config.json');
-const { shareMessageBySubscribers } = require('../telegram/broadcasts');
 
 class DockerWatcher {
     constructor() {
@@ -120,6 +119,7 @@ class DockerWatcher {
 ${this.formatContainerState(currentState)}`;
                 
                 try {
+                    const { shareMessageBySubscribers } = require('../telegram/broadcasts');
                     await shareMessageBySubscribers(message);
                 } catch (error) {
                     console.error('Error sending restart notification:', error.message);
@@ -129,6 +129,7 @@ ${this.formatContainerState(currentState)}`;
 ${this.formatContainerState(currentState)}`;
                 
                 try {
+                    const { shareMessageBySubscribers } = require('../telegram/broadcasts');
                     await shareMessageBySubscribers(message);
                 } catch (error) {
                     console.error('Error sending start notification:', error.message);
@@ -142,6 +143,7 @@ ${this.formatContainerState(currentState)}`;
 ${this.formatContainerState(currentState)}`;
             
             try {
+                const { shareMessageBySubscribers } = require('../telegram/broadcasts');
                 await shareMessageBySubscribers(message);
             } catch (error) {
                 console.error('Error sending stop notification:', error.message);

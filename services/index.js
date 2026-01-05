@@ -1,4 +1,5 @@
 module.exports = {
     clients: require('./clients'),
-    discordMessages: require('./discordMessages')
+    discordMessages: require('./discordMessages'),
+    dockerWatcher: require('./dockerWatcher')
 };

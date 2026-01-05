@@ -42,5 +42,10 @@
     "campaigns-service",
     "admin-service",
     "promo-service"
-  ]
+  ],
+  "docker": {
+    "watchedContainers": [
+      "waivio-frontend"
+    ]
+  }
 }

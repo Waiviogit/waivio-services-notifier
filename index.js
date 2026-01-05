@@ -7,6 +7,11 @@ require('./telegram/commands');
 require('./jobs/checkRedisServices');
 require('./discord/discordBot');
 
+const { dockerWatcher } = require('./services');
+dockerWatcher.initialize().catch(err => {
+    console.error('Failed to initialize Docker watcher:', err.message);
+});
+
 dotenv.config();
 telegram.launch();
 console.log('BOT STARTED!');

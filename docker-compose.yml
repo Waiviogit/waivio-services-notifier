@@ -7,6 +7,8 @@ services:
     command: npm run start
     restart: always
     network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     logging:
       driver: 'json-file'
       options:

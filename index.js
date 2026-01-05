@@ -10,6 +10,7 @@ require('./discord/discordBot');
 const { dockerWatcher } = require('./services');
 dockerWatcher.initialize().catch(err => {
     console.error('Failed to initialize Docker watcher:', err.message);
+    console.error('Docker watcher will not be available. Continuing without it...');
 });
 
 dotenv.config();

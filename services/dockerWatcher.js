@@ -1,13 +1,29 @@
 const Docker = require('dockerode');
+const os = require('os');
 const config = require('../config/config.json');
 const { shareMessageBySubscribers } = require('../telegram/broadcasts');
 
 class DockerWatcher {
     constructor() {
-        this.docker = new Docker();
+        const dockerOptions = this.getDockerOptions();
+        this.docker = new Docker(dockerOptions);
         this.watchedContainers = config.docker?.watchedContainers || [];
         this.containerStates = new Map();
         this.eventStream = null;
+    }
+
+    getDockerOptions() {
+        const dockerConfig = config.docker || {};
+        
+        if (dockerConfig.socketPath) {
+            return { socketPath: dockerConfig.socketPath };
+        }
+        
+        if (os.platform() === 'win32') {
+            return { socketPath: '\\\\.\\pipe\\docker_engine' };
+        }
+        
+        return { socketPath: '/var/run/docker.sock' };
     }
 
     async initialize() {
@@ -19,6 +35,8 @@ class DockerWatcher {
             this.startWatching();
         } catch (error) {
             console.error('Failed to connect to Docker:', error.message);
+            console.error('Make sure Docker socket is mounted. For containers, mount: -v /var/run/docker.sock:/var/run/docker.sock');
+            console.error('Or configure custom socket path in config.json: docker.socketPath');
             throw error;
         }
     }
